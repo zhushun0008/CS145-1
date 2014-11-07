@@ -1,0 +1,9 @@
+.separator <>
+.import auctionusers_table_uniq.dat auctionusers
+.import items_table_uniq.dat items
+.import bids_table_uniq.dat bids
+.import categories_table_uniq.dat categories
+
+update auctionusers set location=null where location="NULL";
+update auctionusers set country=null where country="NULL";
+update items set buy_price=null where buy_price="NULL";

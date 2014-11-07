@@ -1,0 +1,21 @@
+Relational Schema Design:
+The relational schema consists of 4 relations. These are as follows:
+1) bids(item_id, user_id, time, bid_amount)
+2) auctionusers(user_id, rating,location,country)
+3) items(item_id, name, currently, first_bid, number_of_bids, started, ends, seller_id, description, buy_price)
+4) categories(item_id, category)
+
+The schema is in 4NF. The steps from the mega-relation to the current relations is as follows:
+1) Mega-relation(item_id, name, currently, first_bid, number_of_bids, started, ends, seller_id, seller_rating, seller_location, seller_country, description, buy_price, user_id,user_rating, time, bid_amount, category)
+MVDs:
+item_id -->>(category)
+user_id -> (rating, location, country)
+seller_id follows the same MVD as user_id (and refers to the same data)
+item_id -->>(user_id,time, bid_amount)
+
+2) Splitting the relations to ensure that the keys remain on the left of the dependencies listed above.
+
+Categories = R1(item_id, category),
+Auctionusers = R2(user_id, rating,location,country)
+Bids = R3(item_id,user_id,time,bid_amount)
+Items = R4(item_id, name, currently, first_bid, number_of_bids, started, ends, seller_id, description, buy_price)
