@@ -20,28 +20,28 @@ Make the attributes of the table 'categories' named 'item_id', 'category' as Pri
 Add a check constraint on table 'items' to ensure ends>started. This constraint is added to 'create.sql'
 
 8. The Current Price of an item must always match the Amount of the most recent bid for that item:
-Add a trigger to update the 'currently' attribute on table 'items' to the newly inserted 'bid_amount' after each insert on 'bids'. This trigger is added as 'trigger1_add.sql'. 
+Add a trigger to update the 'currently' attribute on table 'items' to the newly inserted 'bid_amount' after each insert on 'bids'. This trigger is added as 'trigger1_add.sql' and 'trigger1_drop.sql'. 
 
 9. A user may not bid on an item he or she is also selling.
-Add a trigger to block insertion (before) on bids table where the user_id for the item_id is already listed as seller_id in table 'items' for the same item_id. This trigger is added as 'trigger2_add.sql'. 
+Add a trigger to block insertion (before) on bids table where the user_id for the item_id is already listed as seller_id in table 'items' for the same item_id. This trigger is added as 'trigger2_add.sql' and 'trigger2_drop.sql'. 
 
 10. No auction may have two bids at the exact same time.
-Add a trigger to block insertion on bids table where the time in bids table is the same as any other time for the same item_id. This trigger is added as 'trigger3_add.sql'. -- CHange to make sure you add primary keys or Unique, but do make sure that it tallies with the primary keys u decided earlier!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Added a constraint to ensure that 'time','item_id' in relation 'items' are unique. This constraint is added to 'create.sql' 
 
 11. No auction may have a bid before its start time or after its end time.
-Add a trigger to block insertion (before) on bids table where time in bids table is before or after the 'started' and 'ends' in the 'items' table for same item_id.This trigger is added as 'trigger4_add.sql'. 
+Add a trigger to block insertion (before) on bids table where time in bids table is before or after the 'started' and 'ends' in the 'items' table for same item_id.This trigger is added as 'trigger3_add.sql' and 'trigger3_drop.sql' 
 
 12. No user can make a bid of the same amount to the same item more than once.
-Add a trigger to block insertion on bids table where item_id, user_id and bid_amount match with another bid. This trigger is added as 'trigger5_add.sql'. --make all the three primary keys/unique. 
+Add a constraint on making ('item_id','user_id','bid_amount') unique in relation 'items'. The constraint is added to 'create.sql'
 
 13. In every auction, the Number of Bids attribute corresponds to the actual number of bids for that particular item.
-Add a trigger to update the number_of_bids in items table after every insert to the bids table for each item_id. 
+Add a trigger to update the 'number_of_bids' in 'items' table after every insert to the 'bids' table for each item_id. This trigger is added as 'trigger4_add.sql' and 'trigger4_drop.sql'
 
 14. Any new bid for a particular item must have a higher amount than any of the previous bids for that particular item.
-Add a trigger to block/reject bids that are lower than the max bid_amount in the bids table for that particular item_id.This trigger is added as 'trigger6_add.sql'.
+Add a trigger to block/reject bids that are lower than the max bid_amount in the bids table for that particular item_id.This trigger is added as 'trigger5_add.sql' and 'trigger5_drop.sql'.
 
 15. All new bids must be placed at the time which matches the current time of your AuctionBase system.
-Before inserting new bid, update the time with current time of AuctionBase system. This trigger is added as 'trigger7_add.sql'.
+Check whether bid_time is same as current time. This trigger is added as 'trigger6_add.sql' and 'trigger6_drop.sql'
 
 16. The current time of your AuctionBase system can only advance forward in time, not backward in time.
-Add a trigger to block updates (before) to CurrentTime table where time updated is less than already existing time in the table. This trigger is added as 'trigger8_add.sql'.
+Add a trigger to block updates (before) to CurrentTime table where time updated is less than already existing time in the table. This trigger is added as 'trigger7_add.sql' and 'trigger7_drop.sql'
